@@ -1,4 +1,4 @@
-package com.example.demojar.entity;
+package com.example.demojar;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

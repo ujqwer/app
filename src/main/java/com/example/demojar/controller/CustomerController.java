@@ -1,6 +1,6 @@
 package com.example.demojar.controller;
 
-import com.example.demojar.entity.Customer;
+import com.example.demojar.Customer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
