@@ -23,6 +23,6 @@ public class UserController {
     @GetMapping("/hello")
     public String method()
     {
-        return "Hello bbb!!";
+        return "Hello ujjman!!";
     }
 }
