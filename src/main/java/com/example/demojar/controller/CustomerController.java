@@ -1,9 +1,12 @@
 package com.example.demojar.controller;
 
 import com.example.demojar.Customer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.demojar.payloads.UserDto;
+import com.example.demojar.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +22,22 @@ public class CustomerController {
     @GetMapping
     public List<Customer> findAllCustomers(){
         return CUSTOMERS;
+    }
+    @GetMapping("/hello")
+    public String method()
+    {
+        return "Hello Ujjman!!";
+    }
+
+
+    @Autowired
+    private UserService userService;
+
+
+    @PostMapping("/")
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
+    {
+        UserDto createUserDto = this.userService.createUser(userDto);
+        return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
     }
 }
