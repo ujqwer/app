@@ -19,11 +19,11 @@ public class CustomerController {
             new Customer(3L, "elon", "musk","elon@javawhizz.com"),
             new Customer(4L, "dunny","duncan","dunny@javawhizz.com")
     );
+//    @GetMapping
+//    public List<Customer> findAllCustomers(){
+//        return CUSTOMERS;
+//    }
     @GetMapping
-    public List<Customer> findAllCustomers(){
-        return CUSTOMERS;
-    }
-    @GetMapping("/hello")
     public String method()
     {
         return "Hello Ujjman!!";
