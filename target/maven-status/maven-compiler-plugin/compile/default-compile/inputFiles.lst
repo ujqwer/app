@@ -1,3 +1,9 @@
-C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entity\Customer.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\DemoJarApplication.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\UserController.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\impl\UserServiceImpl.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\Customer.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\CustomerController.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\User.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\payloads\UserDto.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\repositories\UserRepo.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\UserService.java
