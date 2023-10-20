@@ -21,7 +21,7 @@ public class CustomerController {
     @GetMapping
     public String method()
     {
-        return "Hello Ujjman!!";
+        return "Hello baby!!";
     }
 
 
