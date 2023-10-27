@@ -1,8 +1,6 @@
 package com.example.demojar.services;
 
-import com.example.demojar.entities.User;
 import com.example.demojar.payloads.UserDto;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -4,7 +4,6 @@ import com.example.demojar.entities.User;
 import com.example.demojar.payloads.UserDto;
 import com.example.demojar.repositories.UserRepo;
 import com.example.demojar.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
