@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 public interface UserService {
-    UserDto createUser(UserDto user);
-    UserDto updateUser(UserDto user, Integer id);
-    UserDto getUserById(Integer id);
-    List<UserDto> getAllUsers();
-    void deleteUser(Integer userId);
+
+    User createUser(User user);
+    User updateUser(User user, Long id);
+    User getUserById(Long id);
+    List<User> getAllUsers();
+    void deleteUser(Long userId);
 }

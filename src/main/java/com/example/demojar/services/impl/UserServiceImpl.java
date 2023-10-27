@@ -5,44 +5,49 @@ import com.example.demojar.payloads.UserDto;
 import com.example.demojar.repositories.UserRepo;
 import com.example.demojar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
     private final UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     public UserServiceImpl(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
     @Override
-    public UserDto createUser(UserDto user) {
+    public User createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        User user1=this.dtoToUser(user);
-        this.userRepo.save(user1);
+        userRepo.save(user);
 
-        return this.userToDto(user1);
+        return user;
     }
 
     @Override
-    public UserDto updateUser(UserDto userDto, Integer id) {
+    public User updateUser(User user, Long id) {
+        return null;
+    }
 
+
+
+    @Override
+    public User getUserById(Long id) {
         return null;
     }
 
     @Override
-    public UserDto getUserById(Integer id) {
-        return null;
+    public List<User> getAllUsers() {
+        return userRepo.findAll();
     }
 
     @Override
-    public List<UserDto> getAllUsers() {
-        return null;
-    }
-
-    @Override
-    public void deleteUser(Integer userId) {
+    public void deleteUser(Long userId) {
 
     }
 

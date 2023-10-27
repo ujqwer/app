@@ -1,4 +1,4 @@
-package com.example.demojar.entities;
+package com.example.demojar.models;
 
 import lombok.*;
 

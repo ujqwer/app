@@ -1,7 +1,7 @@
 package com.example.demojar.controller;
 
-import com.example.demojar.entities.JwtRequest;
-import com.example.demojar.entities.JwtResponse;
+import com.example.demojar.models.JwtRequest;
+import com.example.demojar.models.JwtResponse;
 import com.example.demojar.security.JwtHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

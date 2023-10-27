@@ -1,6 +1,7 @@
 package com.example.demojar.controller;
 
 import com.example.demojar.Customer;
+import com.example.demojar.entities.User;
 import com.example.demojar.payloads.UserDto;
 import com.example.demojar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +31,9 @@ public class CustomerController {
 
 
     @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
+    public ResponseEntity<User> createUser(@RequestBody User user)
     {
-        UserDto createUserDto = this.userService.createUser(userDto);
-        return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
+        userService.createUser(user);
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 }
