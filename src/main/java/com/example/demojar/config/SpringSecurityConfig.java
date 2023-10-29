@@ -45,11 +45,11 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf-> csrf.disable())
                 .authorizeRequests()
+                .requestMatchers("/api/**").authenticated()
                 .requestMatchers("/registration/**","/login/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin(formLogin -> formLogin.loginPage("/login").successHandler(successHandler))
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login"))
+                .logout(logout -> logout.logoutUrl("/api/users/logout").logoutSuccessUrl("/login"))
                 .oauth2Login(oauth2login -> oauth2login.loginPage("/login").successHandler(successHandler));
 
         return http.build();

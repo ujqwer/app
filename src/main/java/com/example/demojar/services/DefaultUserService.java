@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface DefaultUserService extends UserDetailsService {
 
-    User save(UserRegisteredDTO userRegisteredDTO);
-
+    User save(User user);
+    User findUserById(Integer id);
 
 
 

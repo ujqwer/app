@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -44,19 +45,27 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
     }
+    @Override
+    public User findUserById(Integer id) throws UsernameNotFoundException {
+
+        Optional<User> userobj = userRepo.findById(id);
+        User user;
+        if(userobj.isEmpty()) {
+            throw new UsernameNotFoundException("Invalid user id.");
+        }
+        else {
+            user=userobj.get();
+        }
+        return user;
+    }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRole())).collect(Collectors.toList());
     }
 
     @Override
-    public User save(UserRegisteredDTO userRegisteredDTO) {
+    public User save(User user) {
         Role role = roleRepo.findByRole("USER");
-
-        User user = new User();
-        user.setEmail(userRegisteredDTO.getEmail_id());
-        user.setName(userRegisteredDTO.getName());
-        user.setPassword(passwordEncoder.encode(userRegisteredDTO.getPassword()));
         user.setRole(role);
 
         return userRepo.save(user);

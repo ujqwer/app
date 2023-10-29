@@ -1,6 +1,8 @@
 package com.example.demojar.controller;
 
+import com.example.demojar.entities.User;
 import com.example.demojar.payloads.UserDto;
+import com.example.demojar.services.DefaultUserService;
 import com.example.demojar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private DefaultUserService defaultUserService;
 
 
     @PostMapping("/")
@@ -25,4 +29,14 @@ public class UserController {
     {
         return "Hello ujjman!!";
     }
+
+    @PostMapping("/getuserfromid")
+    public ResponseEntity<User> getUserFromId(@RequestBody Object id)
+    {
+
+        int a=Integer.parseInt(id.toString());
+
+        return new ResponseEntity<>(this.defaultUserService.findUserById(a), HttpStatus.CREATED);
+    }
+
 }

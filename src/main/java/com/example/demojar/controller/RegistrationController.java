@@ -1,5 +1,6 @@
 package com.example.demojar.controller;
 
+import com.example.demojar.entities.User;
 import com.example.demojar.payloads.UserRegisteredDTO;
 import com.example.demojar.services.DefaultUserService;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,7 @@ public class RegistrationController {
 
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user")
-                                      UserRegisteredDTO registrationDto) {
+                                      User registrationDto) {
         userService.save(registrationDto);
         return "redirect:/login";
     }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
@@ -19,18 +20,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class DashboardController {
     @Autowired
     UserRepository userRepo;
+    User user;
     @GetMapping
     public String displayDashboard(Model model){
         SecurityContext securityContext = SecurityContextHolder.getContext();
         if(securityContext.getAuthentication().getPrincipal() instanceof DefaultOAuth2User) {
-            DefaultOAuth2User user = (DefaultOAuth2User) securityContext.getAuthentication().getPrincipal();
-            model.addAttribute("userDetails", user.getAttribute("name")!= null ?user.getAttribute("name"):user.getAttribute("login"));
+            DefaultOAuth2User oAuthUser = (DefaultOAuth2User) securityContext.getAuthentication().getPrincipal();
+            User user = userRepo.findByEmail(oAuthUser.getAttribute("email"));
+            this.user=user;
+            model.addAttribute("userDetails", user.getName());
         }else {
             org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) securityContext.getAuthentication().getPrincipal();
             User users = userRepo.findByEmail(user.getUsername());
             model.addAttribute("userDetails", users.getName());
         }
         return "dashboard";
+    }
+
+    @GetMapping("/getuser")
+    @ResponseBody
+    public User getUser()
+    {
+        return this.user;
     }
 
 }

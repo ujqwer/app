@@ -1,6 +1,7 @@
 package com.example.demojar.config;
 
 
+import com.example.demojar.entities.User;
 import com.example.demojar.payloads.UserRegisteredDTO;
 import com.example.demojar.repositories.UserRepository;
 import com.example.demojar.services.DefaultUserService;
@@ -34,14 +35,19 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             DefaultOAuth2User  userDetails = (DefaultOAuth2User ) authentication.getPrincipal();
             String username = userDetails.getAttribute("email") !=null?userDetails.getAttribute("email"):userDetails.getAttribute("login")+"@gmail.com" ;
             if(userRepo.findByEmail(username) == null) {
-                UserRegisteredDTO user = new UserRegisteredDTO();
-                user.setEmail_id(username);
+                User user = new User();
+                user.setEmail(username);
                 user.setName(userDetails.getAttribute("name") !=null?userDetails.getAttribute("name"):userDetails.getAttribute("login"));
                 user.setPassword(("Dummy"));
-                user.setRole("USER");
                 userService.save(user);
+                //if user does not exists then redirect to registration page
+                redirectUrl = "http://localhost:3000/register";
             }
-        }  redirectUrl = "/dashboard";
+            else{
+                //if user already exists then redirect to dashboard
+                redirectUrl="https://cal.ai";
+            }
+        }
         new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);
     }
 

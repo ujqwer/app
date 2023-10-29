@@ -24,6 +24,7 @@ public class LoginController {
 
     @GetMapping
     public String login() {
+
         return "login";
     }
 
@@ -33,5 +34,6 @@ public class LoginController {
         System.out.println("UserDTO"+userLoginDTO);
         userService.loadUserByUsername(userLoginDTO.getUsername());
     }
+
 
 }
