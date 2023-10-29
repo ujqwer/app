@@ -1,3 +1,5 @@
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\Product.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\Bid.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\User.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\payloads\UserDto.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\config\SpringSecurityConfig.java
@@ -9,6 +11,7 @@ C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\payloads\
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\DefaultUserService.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\DashboardController.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\UserController.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\Message.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\repositories\UserRepository.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\impl\UserServiceImpl.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\config\CustomSuccessHandler.java
