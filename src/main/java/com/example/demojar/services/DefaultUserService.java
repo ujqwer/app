@@ -8,6 +8,7 @@ public interface DefaultUserService extends UserDetailsService {
 
     User save(User user);
     User findUserById(Integer id);
+    User findUserByEmail(String email);
 
 
 

@@ -46,6 +46,16 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRole()));
     }
     @Override
+    public User findUserByEmail(String email){
+        User user = userRepo.findByEmail(email);
+        if(user==null) {
+            throw new UsernameNotFoundException("Invalid user email.");
+        }
+
+        return user;
+
+    }
+    @Override
     public User findUserById(Integer id) throws UsernameNotFoundException {
 
         Optional<User> userobj = userRepo.findById(id);

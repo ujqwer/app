@@ -7,6 +7,9 @@ import com.example.demojar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,13 +33,23 @@ public class UserController {
         return "Hello ujjman!!";
     }
 
-    @PostMapping("/getuserfromid")
+    @PostMapping("/get_user_from_id")
     public ResponseEntity<User> getUserFromId(@RequestBody Object id)
     {
 
         int a=Integer.parseInt(id.toString());
 
         return new ResponseEntity<>(this.defaultUserService.findUserById(a), HttpStatus.CREATED);
+    }
+    @GetMapping("/get_current_user")
+    public ResponseEntity<User> getCurrentUser()
+    {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        DefaultOAuth2User userDetails = (DefaultOAuth2User ) auth.getPrincipal();
+        String email=userDetails.getAttribute("email");
+
+        return new ResponseEntity<>(this.defaultUserService.findUserByEmail(email), HttpStatus.CREATED);
     }
 
 }
