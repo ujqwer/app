@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -28,6 +27,7 @@ public class UserController {
         UserDto createUserDto = this.userService.createUser(userDto);
         return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
     }
+    @CrossOrigin(origins = "*")
     @GetMapping("/hello")
     public String method()
     {
@@ -43,6 +43,7 @@ public class UserController {
         return new ResponseEntity<>(this.defaultUserService.findUserById(a), HttpStatus.CREATED);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/get_current_user")
     public ResponseEntity<User> getCurrentUser()
     {
