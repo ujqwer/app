@@ -45,7 +45,7 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             }
             else{
                 //if user already exists then redirect to dashboard
-                redirectUrl="https://cal.ai";
+                redirectUrl="https://google.com";
             }
         }
         new DefaultRedirectStrategy().sendRedirect(request, response, redirectUrl);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -41,6 +42,7 @@ public class UserController {
 
         return new ResponseEntity<>(this.defaultUserService.findUserById(a), HttpStatus.CREATED);
     }
+
     @GetMapping("/get_current_user")
     public ResponseEntity<User> getCurrentUser()
     {
