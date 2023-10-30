@@ -48,6 +48,7 @@ public class UserController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         DefaultOAuth2User userDetails = (DefaultOAuth2User ) auth.getPrincipal();
+        System.out.println("hello babe");
         String email=userDetails.getAttribute("email");
 
         return new ResponseEntity<>(this.defaultUserService.findUserByEmail(email), HttpStatus.CREATED);
