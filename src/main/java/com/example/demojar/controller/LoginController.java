@@ -22,7 +22,7 @@ public class LoginController {
         return new UserLoginDTO();
     }
 
-    @GetMapping("/login")
+    @GetMapping
     public String login() {
 
         return "login";
