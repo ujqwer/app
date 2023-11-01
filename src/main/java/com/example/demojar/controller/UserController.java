@@ -1,9 +1,7 @@
 package com.example.demojar.controller;
 
 import com.example.demojar.entities.User;
-import com.example.demojar.payloads.UserDto;
 import com.example.demojar.services.DefaultUserService;
-import com.example.demojar.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,25 +13,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    @Autowired
-    private UserService userService;
+
     @Autowired
     private DefaultUserService defaultUserService;
 
 
-    @PostMapping("/")
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto)
-    {
-        UserDto createUserDto = this.userService.createUser(userDto);
-        return new ResponseEntity<>(createUserDto, HttpStatus.CREATED);
-    }
+
     @GetMapping("/hello")
     public String method()
     {
         return "Hello ujjman!!";
     }
 
-    @PostMapping("/get_user_from_id")
+    @PostMapping("/getUserFromId")
     public ResponseEntity<User> getUserFromId(@RequestBody Object id)
     {
 
@@ -42,16 +34,60 @@ public class UserController {
         return new ResponseEntity<>(this.defaultUserService.findUserById(a), HttpStatus.CREATED);
     }
 
-    @GetMapping("/get_current_user")
-    public ResponseEntity<User> getCurrentUser()
-    {
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        DefaultOAuth2User userDetails = (DefaultOAuth2User ) auth.getPrincipal();
-        System.out.println("hello babe");
-        String email=userDetails.getAttribute("email");
+    @GetMapping("/existsByEmail")
+    public ResponseEntity<Boolean> existsByEmail(@RequestParam String email) {
+        try {
+            this.defaultUserService.findUserByEmail(email);
+            return new ResponseEntity<>(true,HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false,HttpStatus.OK);
+        }
 
-        return new ResponseEntity<>(this.defaultUserService.findUserByEmail(email), HttpStatus.CREATED);
     }
+
+    @PostMapping("/createUser")
+    public ResponseEntity<Boolean> createUser(@RequestBody User user)
+    {
+        try {
+            this.defaultUserService.save(user);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
+
+
+    @GetMapping("/getUserFromEmail")
+    public ResponseEntity<User> getUserFromEmail(@RequestParam String email)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            return new ResponseEntity<>(user,HttpStatus.OK);
+        }
+        catch (Exception e) {
+
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
+
+    }
+
+    @PostMapping("/updateUser")
+    public ResponseEntity<Boolean> updateUser(@RequestBody User user)
+    {
+        try {
+            this.defaultUserService.save(user);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
+
+
+
 
 }

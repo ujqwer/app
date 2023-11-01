@@ -82,23 +82,6 @@ public class User {
 
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_role", joinColumns = @JoinColumn(name = "cust_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id") )
-    Set<Role> roles = new HashSet<Role>();
-
-
-
-    public Set<Role> getRole() {
-        return roles;
-    }
-
-    public void setRole(Role role) {
-        this.roles.add(role);
-    }
-
-
-
 
 
 
