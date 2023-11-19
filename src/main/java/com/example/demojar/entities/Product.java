@@ -20,14 +20,18 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int userCreatedId;
+    private String userCreatedEmailId;
+    private String photosUrls="";
     private String name;
     private double price;
+    private String createdOn="";
+    private String deadline="";
     private int quantity;
-    private String details;
-    private boolean isSold;
-    private String soldDate;
-    private String bidsOnThisProduct;
+    private String details="";
+    private boolean isSold=false;
+    private String soldDate="";
+    private String soldToUserName="";
+    private String bidsOnThisProduct="";
 
     public List<String> getBidsOnThisProduct() {
         return Arrays.asList(bidsOnThisProduct.split(","));
@@ -35,6 +39,13 @@ public class Product {
 
     public void setBidsOnThisProduct(List<String> bidsOnThisProduct) {
         this.bidsOnThisProduct = String.join(",", bidsOnThisProduct);
+    }
+public List<String> getPhotoUrlsOnThisProduct() {
+        return Arrays.asList(photosUrls.split(","));
+    }
+
+    public void setPhotoUrlsOnThisProduct(List<String> photoUrlsOnThisProduct) {
+        this.photosUrls = String.join(",", photoUrlsOnThisProduct);
     }
 
 

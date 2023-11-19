@@ -30,11 +30,12 @@ public class User {
     private String phoneNumber;
     private int moneyLeft;
     private String itemsPurchased = "";
-    private String itemsListed = "";
+    private String itemsListed = "";    //current listings
     private String visibleTo = "";
-    private String itemsSold = "";
+    private String itemsSold = "";   //past listings
     private String currentBids = "";
     private String pastBids = "";
+    private int totalEarnings;
     private int moneySpent;
     private String password;
 

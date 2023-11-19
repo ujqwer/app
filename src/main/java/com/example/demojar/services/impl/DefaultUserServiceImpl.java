@@ -26,13 +26,6 @@ public class DefaultUserServiceImpl implements DefaultUserService {
 
 
 
-    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
-    public DefaultUserServiceImpl() {
-    }
-
-
-
     @Override
     public User findUserByEmail(String email){
         User user = userRepo.findByEmail(email);
@@ -43,6 +36,8 @@ public class DefaultUserServiceImpl implements DefaultUserService {
         return user;
 
     }
+
+
 
     @Override
     public User updateUser(User user) {

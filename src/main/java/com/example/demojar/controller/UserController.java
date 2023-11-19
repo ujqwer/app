@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -87,6 +89,143 @@ public class UserController {
         }
     }
 
+    @GetMapping("/getItemsPurchased")
+    public ResponseEntity<List<String>> getItemsPurchased(@RequestParam String email)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            List<String> items=user.getItemsPurchased();
+            return new ResponseEntity<>(items,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.CREATED);
+        }
+    }
+
+    @PostMapping("/setItemsPurchased")
+    public ResponseEntity<Boolean> setItemsPurchased(@RequestBody String email, List<String> items)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            user.setItemsPurchased(items);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
+
+    @GetMapping("/getItemsListed")
+    public ResponseEntity<List<String>> getItemsListed(@RequestParam String email )
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            List<String> items=user.getItemsListed();
+            return new ResponseEntity<>(items,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.CREATED);
+        }
+    }
+
+    @PostMapping("/setItemsListed")
+    public ResponseEntity<Boolean> setItemsListed(@RequestBody String email, List<String> items)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            user.setItemsListed(items);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
+
+    @GetMapping("/getVisibleTo")
+    public ResponseEntity<List<String>> getVisibleTo(@RequestParam String email )
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            List<String> items=user.getVisibleTo();
+            return new ResponseEntity<>(items,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.CREATED);
+        }
+    }
+    @PostMapping("/setVisibleTo")
+    public ResponseEntity<Boolean> setVisibleTo(@RequestBody String email, List<String> visibleTo)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            user.setVisibleTo(visibleTo);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
+    @GetMapping("/getItemsSold")
+    public ResponseEntity<List<String>> getItemsSold(@RequestParam String email )
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            List<String> items=user.getItemsSold();
+            return new ResponseEntity<>(items,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.CREATED);
+        }
+    }
+
+    @PostMapping("/setItemsSold")
+    public ResponseEntity<Boolean> setItemsSold(@RequestBody String email, List<String> items)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            user.setItemsSold(items);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
+
+    @GetMapping("/getCurrentBids")
+    public ResponseEntity<List<String>> getCurrentBids(@RequestParam String email )
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            List<String> bids=user.getCurrentBids();
+            return new ResponseEntity<>(bids,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(null,HttpStatus.CREATED);
+        }
+    }
+
+    @PostMapping("/setCurrentBids")
+    public ResponseEntity<Boolean> setCurrentBids(@RequestBody String email, List<String> bids)
+    {
+        try {
+            User user = this.defaultUserService.findUserByEmail(email);
+            user.setCurrentBids(bids);
+            return new ResponseEntity<>(true,HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false,HttpStatus.CREATED);
+        }
+    }
 
 
 
