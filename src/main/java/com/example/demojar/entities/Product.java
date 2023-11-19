@@ -28,10 +28,14 @@ public class Product {
     private String deadline="";
     private int quantity;
     private String details="";
-    private boolean isSold=false;
+    private int isSold=0;     //0 is false and 1 is true
     private String soldDate="";
     private String soldToUserName="";
     private String bidsOnThisProduct="";
+
+    public int isSold(){
+        return this.isSold;
+    }
 
     public List<String> getBidsOnThisProduct() {
         return Arrays.asList(bidsOnThisProduct.split(","));

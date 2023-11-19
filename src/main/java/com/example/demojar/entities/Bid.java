@@ -22,7 +22,7 @@ public class Bid {
     private double priceOfBid;
     private String timestamp;
     private String deadline;
-    private boolean isExpired;
+    private int isExpired=0;
 
 
 }

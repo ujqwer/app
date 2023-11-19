@@ -65,7 +65,7 @@ public class ProductController {
         List<Product> products = new ArrayList<>();
         for(Product p : list)
         {
-            if(!p.isSold())
+            if(p.isSold()==0)
             {
                 products.add(p);
             }
