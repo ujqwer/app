@@ -37,7 +37,7 @@ public class BidController {
         map.put("bidId",bid.getId());
         map.put("productId",bid.getForWhichProductId());
         ResponseEntity<Boolean> response1=productController.setBidsOnProduct(map);
-        if(Boolean.TRUE.equals(response1.getBody()))
+        if(!Boolean.TRUE.equals(response1.getBody()))
         {
             return new ResponseEntity<>(false,HttpStatus.CREATED);
         }
