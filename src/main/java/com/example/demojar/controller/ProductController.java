@@ -9,23 +9,24 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/product")
 public class ProductController {
 
     @Autowired
+    UserController userController;
+    @Autowired
     private DefaultProductService defaultProductService;
+    @Autowired
+    private DefaultUserService defaultUserService;
 
 
     @GetMapping("/hello")
     public String method() {
         return "Hello ujjman!!";
     }
-
 
 
     @GetMapping("/{id}")
@@ -46,27 +47,23 @@ public class ProductController {
                 }
             }
             return products;
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             return null;
         }
 
     }
 
- @GetMapping("/getAllProducts")
+    @GetMapping("/getAllProducts")
     public List<Product> getAllProducts() {
         return defaultProductService.findAllProducts();
     }
 
     @GetMapping("/getAllUnsoldProducts")
     public List<Product> getAllUnsoldProducts() {
-        List<Product> list=  defaultProductService.findAllProducts();
+        List<Product> list = defaultProductService.findAllProducts();
         List<Product> products = new ArrayList<>();
-        for(Product p : list)
-        {
-            if(p.isSold()==0)
-            {
+        for (Product p : list) {
+            if (p.isSold() == 0) {
                 products.add(p);
             }
         }
@@ -74,16 +71,78 @@ public class ProductController {
     }
 
     @PostMapping("/createProduct")
-    public ResponseEntity<Boolean> createProduct(@RequestBody Product product)
-    {
+    public ResponseEntity<Boolean> createProduct(@RequestBody Product product) {
+
+        this.defaultProductService.save(product);
+        Map<String,String> map=new HashMap<>();
+        map.put("email",product.getUserCreatedEmailId());
+        map.put("itemId",product.getId()+"");
+        userController.setItemsListed(map);
+
+
+        return new ResponseEntity<>(true, HttpStatus.CREATED);
+
+    }
+    @PostMapping("/sellProduct")   // NOT COMPLETE
+    public ResponseEntity<Boolean> sellProduct(@RequestBody Product product) {
+
+        product.setIsSold(1);
+        this.defaultProductService.save(product);
+        Map<String,String> map=new HashMap<>();
+        map.put(product.getUserCreatedEmailId(),product.getId()+"");
+        userController.setItemsSold(map);
+
+
+        return new ResponseEntity<>(true, HttpStatus.CREATED);
+
+    }
+
+    @GetMapping("/getBidsOnProduct")
+    public ResponseEntity<List<String>> getBidsOnProduct(@RequestParam Integer id) {
         try {
+            Product product = this.defaultProductService.findProductById(id).get();
+            return new ResponseEntity<>(product.getBidsOnThisProduct(), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        }
+
+    }
+
+    @PostMapping("/setBidsOnProduct")
+    public ResponseEntity<Boolean> setBidsOnProduct(@RequestBody Map<String,Integer> request) {
+        try {
+            Product product = this.defaultProductService.findProductById(request.get("productId")).get();
+            List<String> bids = new ArrayList<>(product.getBidsOnThisProduct());
+            bids.add(request.get("bidId")+"");
+            product.setBidsOnThisProduct(bids);
             this.defaultProductService.save(product);
             return new ResponseEntity<>(true, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false, HttpStatus.CREATED);
         }
-        catch(Exception e)
-        {
-            return new ResponseEntity<>(false,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/getPhotosUrlsOnProduct")
+    public ResponseEntity<List<String>> getPhotosUrlsOnProduct(@RequestParam Integer id) {
+        try {
+            Product product = this.defaultProductService.findProductById(id).get();
+            return new ResponseEntity<>(product.getPhotoUrlsOnThisProduct(), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
         }
+
+    }
+
+    @PostMapping("/setPhotosUrlsProduct")
+    public ResponseEntity<Boolean> setPhotosUrlsOnProduct(@RequestBody Integer id, List<String> urls) {
+        try {
+            Product product = this.defaultProductService.findProductById(id).get();
+            product.setPhotoUrlsOnThisProduct(urls);
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false, HttpStatus.CREATED);
+        }
+
     }
 }
 

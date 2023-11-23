@@ -17,11 +17,10 @@ public class Bid {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private int userCreatedId;
+    private String userCreatedEmailId="";
     private int forWhichProductId;
     private double priceOfBid;
-    private String timestamp;
-    private String deadline;
+    private String timestamp="";
     private int isExpired=0;
 
 
