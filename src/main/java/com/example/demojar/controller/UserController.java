@@ -135,6 +135,60 @@ public class UserController {
 
     }
 
+
+    public Boolean reduceAndAddMoneyToBuyerAndSeller(@RequestBody Map<String,String> map)
+    {
+        String sellerEmail = map.get("sellerEmail");
+        String buyerEmail = map.get("buyerEmail");
+        int priceOfProduct = (int)Double.parseDouble(map.get("priceOfProduct"));
+        User seller = this.defaultUserService.findUserByEmail(sellerEmail);
+        User buyer = this.defaultUserService.findUserByEmail(buyerEmail);
+        seller.setMoneyLeft(seller.getMoneyLeft()+priceOfProduct);
+        buyer.setMoneyLeft(buyer.getMoneyLeft()-priceOfProduct);
+        buyer.setMoneySpent(buyer.getMoneySpent()+priceOfProduct);
+        seller.setTotalEarnings(seller.getTotalEarnings()+priceOfProduct);
+        this.defaultUserService.save(seller);
+        this.defaultUserService.save(buyer);
+
+        return true;
+    }
+
+    @PostMapping("/reduceItemsListed")
+    public ResponseEntity<Boolean> reduceItemsListed(@RequestBody Map<String, String> request) {
+        try {
+            User user = this.defaultUserService.findUserByEmail(request.get("sellerEmail"));
+            List<String> items = new ArrayList<>(user.getItemsListed());
+            items.remove(request.get("itemId"));
+            user.setItemsListed(items);
+            this.defaultUserService.save(user);
+            System.out.println(user.getItemsListed());
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        }
+        catch(Exception e)
+        {
+            return new ResponseEntity<>(false, HttpStatus.CREATED);
+        }
+
+
+    }
+
+
+
+    public ResponseEntity<Boolean> addProductToBuyListOfBuyer(@RequestBody Map<String,String> request) {
+        try {
+            User buyer = this.defaultUserService.findUserByEmail(request.get("buyerEmail"));
+            List<String> items = new ArrayList<>(buyer.getItemsPurchased());
+            items.add(request.get("itemId"));
+            buyer.setItemsSold(items);
+            this.defaultUserService.save(buyer);
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(false, HttpStatus.CREATED);
+        }
+    }
+
+
+
     @GetMapping("/getVisibleTo")
     public ResponseEntity<List<String>> getVisibleTo(@RequestParam String email) {
         try {
@@ -176,7 +230,7 @@ public class UserController {
     @PostMapping("/setItemsSold")
     public ResponseEntity<Boolean> setItemsSold(@RequestBody Map<String,String> request) {
         try {
-            User user = this.defaultUserService.findUserByEmail(request.get("email"));
+            User user = this.defaultUserService.findUserByEmail(request.get("sellerEmail"));
             List<String> items = new ArrayList<>(user.getItemsSold());
             items.add(request.get("itemId"));
             user.setItemsSold(items);

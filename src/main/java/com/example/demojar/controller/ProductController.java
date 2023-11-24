@@ -83,15 +83,26 @@ public class ProductController {
         return new ResponseEntity<>(true, HttpStatus.CREATED);
 
     }
-    @PostMapping("/sellProduct")   // NOT COMPLETE
-    public ResponseEntity<Boolean> sellProduct(@RequestBody Product product) {
-
+    @GetMapping("/sellProduct")   // NOT COMPLETE
+    public ResponseEntity<Boolean> sellProduct(@RequestParam Integer productId, @RequestParam  String buyerEmail) {
+        Product product = this.defaultProductService.findProductById(productId).get();
         product.setIsSold(1);
-        this.defaultProductService.save(product);
-        Map<String,String> map=new HashMap<>();
-        map.put(product.getUserCreatedEmailId(),product.getId()+"");
-        userController.setItemsSold(map);
+        String sellerEmail = product.getUserCreatedEmailId();
 
+        this.defaultProductService.save(product);
+
+        Map<String,String> map=new HashMap<>();
+        map.put("sellerEmail",sellerEmail);
+        map.put("itemId",productId+"");
+        userController.setItemsSold(map);
+        userController.reduceItemsListed(map);
+
+        map = new HashMap<>();
+        map.put("sellerEmail",sellerEmail);
+        map.put("buyerEmail",buyerEmail);
+        map.put("priceOfProduct",product.getPrice()+"");
+        userController.reduceAndAddMoneyToBuyerAndSeller(map);
+        userController.addProductToBuyListOfBuyer(map);
 
         return new ResponseEntity<>(true, HttpStatus.CREATED);
 
