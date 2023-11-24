@@ -179,7 +179,7 @@ public class UserController {
             User buyer = this.defaultUserService.findUserByEmail(request.get("buyerEmail"));
             List<String> items = new ArrayList<>(buyer.getItemsPurchased());
             items.add(request.get("itemId"));
-            buyer.setItemsSold(items);
+            buyer.setItemsPurchased(items);
             this.defaultUserService.save(buyer);
             return new ResponseEntity<>(true, HttpStatus.CREATED);
         } catch (Exception e) {

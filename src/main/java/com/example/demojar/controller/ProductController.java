@@ -1,5 +1,6 @@
 package com.example.demojar.controller;
 
+import com.example.demojar.entities.Bid;
 import com.example.demojar.entities.Product;
 import com.example.demojar.entities.User;
 import com.example.demojar.services.DefaultProductService;
@@ -83,8 +84,9 @@ public class ProductController {
         return new ResponseEntity<>(true, HttpStatus.CREATED);
 
     }
-    @GetMapping("/sellProduct")   // NOT COMPLETE
-    public ResponseEntity<Boolean> sellProduct(@RequestParam Integer productId, @RequestParam  String buyerEmail) {
+    @PostMapping("/sellProduct")   // NOT COMPLETE
+    public ResponseEntity<Boolean> sellProduct(@RequestBody Bid bid, @RequestParam  String buyerEmail) {
+        int productId = bid.getForWhichProductId();
         Product product = this.defaultProductService.findProductById(productId).get();
         product.setIsSold(1);
         String sellerEmail = product.getUserCreatedEmailId();
@@ -100,7 +102,8 @@ public class ProductController {
         map = new HashMap<>();
         map.put("sellerEmail",sellerEmail);
         map.put("buyerEmail",buyerEmail);
-        map.put("priceOfProduct",product.getPrice()+"");
+        map.put("priceOfProduct",bid.getPriceOfBid()+"");
+        map.put("itemId",productId+"");
         userController.reduceAndAddMoneyToBuyerAndSeller(map);
         userController.addProductToBuyListOfBuyer(map);
 
