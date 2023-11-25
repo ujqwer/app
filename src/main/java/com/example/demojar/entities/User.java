@@ -28,7 +28,7 @@ public class User {
     private String email;
     private String address;
     private String phoneNumber;
-    private int moneyLeft;
+    private int moneyLeft=10000;
     private String itemsPurchased = "";
     private String itemsListed = "";    //current listings
     private String visibleTo = "";

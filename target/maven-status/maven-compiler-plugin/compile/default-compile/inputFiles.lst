@@ -1,5 +1,7 @@
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\Product.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\config\WsConfig.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\Bid.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\ChatController.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\repositories\ProductRepository.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\config\HeaderCodeFilter.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\repositories\BidRepository.java
@@ -13,8 +15,10 @@ C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\impl\DefaultUserServiceImpl.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\DemoJarApplication.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\impl\DefaultBidServiceImpl.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\Util\ActiveUserManager.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\services\DefaultUserService.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\UserController.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\Message.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\repositories\UserRepository.java
+C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\entities\ChatMessage.java
 C:\Users\ujjwa\IdeaProjects\Demo jar\src\main\java\com\example\demojar\controller\BidController.java

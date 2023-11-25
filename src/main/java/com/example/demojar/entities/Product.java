@@ -34,6 +34,7 @@ public class Product {
     private String soldToUserName="";
     private String soldToUserEmail="";
     private String bidsOnThisProduct="";
+    private String finalBidId = null;
 
     public int isSold(){
         return this.isSold;
