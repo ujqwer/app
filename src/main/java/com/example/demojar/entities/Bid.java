@@ -20,7 +20,8 @@ public class Bid {
     private String userCreatedEmailId="";
     private int forWhichProductId;
     private double priceOfBid;
-    private String timestamp="";
+    private String timestampOfCreation="";
+    private String timestampOfAccepting="";
     private int isExpired=0;
 
 

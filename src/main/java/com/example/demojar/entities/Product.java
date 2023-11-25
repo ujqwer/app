@@ -24,6 +24,7 @@ public class Product {
     private String photosUrls="";
     private String name;
     private double price;
+    private double sellingPrice;
     private String createdOn="";
     private String deadline="";
     private int quantity;
@@ -31,6 +32,7 @@ public class Product {
     private int isSold=0;     //0 is false and 1 is true
     private String soldDate="";
     private String soldToUserName="";
+    private String soldToUserEmail="";
     private String bidsOnThisProduct="";
 
     public int isSold(){

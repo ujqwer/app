@@ -90,7 +90,10 @@ public class ProductController {
         Product product = this.defaultProductService.findProductById(productId).get();
         product.setIsSold(1);
         String sellerEmail = product.getUserCreatedEmailId();
-
+        product.setSoldToUserName(userController.getUserFromEmail(bid.getUserCreatedEmailId()).getBody().getName());
+        product.setSoldToUserEmail(bid.getUserCreatedEmailId());
+        product.setSellingPrice(bid.getPriceOfBid());
+        product.setSoldDate(bid.getTimestampOfAccepting());
         this.defaultProductService.save(product);
 
         Map<String,String> map=new HashMap<>();
