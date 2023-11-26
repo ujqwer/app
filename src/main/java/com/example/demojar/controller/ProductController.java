@@ -58,6 +58,27 @@ public class ProductController {
     public List<Product> getAllProducts() {
         return defaultProductService.findAllProducts();
     }
+    @GetMapping("/getItemsPurchasedOfUser")
+    public List<Product> getItemsPurchasedOfUser(@RequestParam String email) {
+        List<String> productsId = userController.getItemsPurchased(email).getBody();
+        List<Product> products =new ArrayList<>();
+
+        try {
+            for (String id : productsId) {
+                if (!id.isEmpty()) {
+                    products.add(getProductById(Integer.parseInt(id)).getBody());
+                }
+            }
+            return products;
+
+        }catch(Exception e)
+        {
+            return products;
+        }
+
+    }
+
+
 
     @GetMapping("/getAllUnsoldProducts")
     public List<Product> getAllUnsoldProducts() {
