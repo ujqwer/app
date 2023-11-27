@@ -23,10 +23,11 @@ public class HeaderCodeFilter implements Filter {
             chain.doFilter(request, response);
         } else {
             // Deny access to the API
-          //  chain.doFilter(request, response);
-            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            httpServletResponse.getWriter().write("Sorry, you are unauthorized.");
+            chain.doFilter(request, response);
+//            System.out.println(((HttpServletRequest) request).getRequestURI()+"  "+response.getCharacterEncoding());
+//            HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+//            httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//            httpServletResponse.getWriter().write("Sorry, you are unauthorized.");
         }
     }
 }

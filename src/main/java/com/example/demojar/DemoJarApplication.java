@@ -22,7 +22,7 @@ public class DemoJarApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000").allowedMethods("GET","PUT","POST","DELETE","OPTIONS").allowCredentials(true);
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET","PUT","POST","DELETE","OPTIONS").allowCredentials(true);
             }
         };
     }
