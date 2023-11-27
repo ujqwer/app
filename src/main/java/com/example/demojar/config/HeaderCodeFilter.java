@@ -18,7 +18,7 @@ public class HeaderCodeFilter implements Filter {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String headerCode = httpServletRequest.getHeader("Baby");
 
-        if (expectedCode.equals(headerCode)) {
+        if (expectedCode.equals(headerCode) || ((HttpServletRequest) request).getRequestURI().startsWith("/ws")) {
             // Allow access to the API
             chain.doFilter(request, response);
         } else {
