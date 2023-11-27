@@ -22,7 +22,7 @@ public class DemoJarApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
 
-                registry.addMapping("/**").allowedOrigins("http://localhost:3000","https://bits-bids44.netlify.app/").allowedMethods("GET","PUT","POST","DELETE","OPTIONS").allowCredentials(true);
+                registry.addMapping("/**").allowedOrigins("http://localhost:3000","https://bits-bids44.netlify.app/","https://bits-bids.vercel.app/").allowedMethods("GET","PUT","POST","DELETE","OPTIONS").allowCredentials(true);
             }
         };
     }
