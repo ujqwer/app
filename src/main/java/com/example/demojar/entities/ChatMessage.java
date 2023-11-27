@@ -1,36 +1,32 @@
 package com.example.demojar.entities;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Table(name = "messages")
 public class ChatMessage {
-    private String content;
-    private String sender;
-    private MessageType type;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+    private int forProductId=0;
+    private String senderUserEmail;
+    private String receiverUserEmail;
+    private String content="";
+    private String timestamp="";
+    private String roomId="";
+    private MessageType type = MessageType.CHAT;
 
     public enum MessageType {
         CHAT, LEAVE, JOIN
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
-        this.sender = sender;
-    }
-
-    public MessageType getType() {
-        return type;
-    }
-
-    public void setType(MessageType type) {
-        this.type = type;
-    }
 
 }

@@ -12,11 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @Setter
 public class ChatRoom {
     private String id;
-    private Set<String> connectedUsers = ConcurrentHashMap.newKeySet();
+    private Set<String> connectedUsers;
 
     public ChatRoom (String id)
     {
         this.id=id;
+        this.connectedUsers = ConcurrentHashMap.newKeySet();
+
 
     }
 }

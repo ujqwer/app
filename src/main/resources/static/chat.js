@@ -5,21 +5,30 @@ function connect() {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/chat/room1', function (message) {
+        var roomId = document.getElementById("roomId").value;
+        stompClient.subscribe(`/topic/chat/${roomId}`, function (message) {
             displayMessage(JSON.parse(message.body).content);
         });
     });
 }
+function createRoom()
+{
 
+    connect();
+}
 function sendMessage() {
+
     var messageContent = document.getElementById("messageInput").value;
+    var roomId = document.getElementById("roomId").value;
     if(messageContent && stompClient) {
         var chatMessage = {
             content: messageContent,
             sender: "User", // Modify this as needed
+            roomId: roomId,
             type: 'CHAT' // You might need to adjust this depending on your ChatMessage class
         };
-        stompClient.send("/app/chat/room1/send", {}, JSON.stringify(chatMessage));
+        const string = `/app/chat/${roomId}/send`;
+        stompClient.send(string, {}, JSON.stringify(chatMessage));
         document.getElementById("messageInput").value = '';
     }
 }
@@ -29,4 +38,4 @@ function displayMessage(message) {
     chatBox.innerHTML += "<div>" + message + "</div>";
 }
 
-connect();
+

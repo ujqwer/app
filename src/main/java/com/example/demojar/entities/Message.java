@@ -19,8 +19,8 @@ public class Message {
     private int id;
     private int senderUserId;
     private int receiverUserId;
-    private String content;
-    private String timestamp;
+    private String content="";
+    private String timestamp="";
 
 
 }
