@@ -147,6 +147,20 @@ public class ChatController {
         }
         return mess;
     }
+    @GetMapping("/getAllMessagesForRoomId")
+    public List<ChatMessage> getAllMessagesForRomId(@RequestParam String roomId)
+    {
+        List<ChatMessage> messages = this.defaultChatMessageService.findAllChatMessages();
+        List<ChatMessage> mess = new ArrayList<>();
+        for(ChatMessage m : messages)
+        {
+            if(m.getRoomId().equals(roomId))
+            {
+                mess.add(m);
+            }
+        }
+        return mess;
+    }
 
     @GetMapping("/getAllMessagesSentOrReceivedByUser")
     public List<ChatMessage> getAllMessagesSentOrReceivedByUser(@RequestParam String email)
