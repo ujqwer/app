@@ -76,6 +76,22 @@ public class BidController {
         }
 
     }
+    @GetMapping("/getBidsOnProduct")
+    public List<Bid> getBidsOfUserFromEmail(@RequestParam Integer productId) {
+        List<Bid> list = defaultBidService.findAllBids();
+        List<Bid> bids = new LinkedList<>();
+        try {
+            for (Bid p : list) {
+                if (p.getForWhichProductId()==productId) {
+                    bids.add(p);
+                }
+            }
+            return bids;
+        } catch (Exception e) {
+            return null;
+        }
+
+    }
 
     @GetMapping("/getAllBids")
     public List<Bid> getAllBids() {
